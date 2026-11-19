@@ -1,0 +1,940 @@
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CurrencyExchangeSystem.ViewModels"
+        x:Class="CurrencyExchangeSystem.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Currency Exchange System"
+        Width="1250"
+        Height="800"
+        MinWidth="1000"
+        MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        Background="#F3F5F9">
+
+    <Window.Styles>
+
+        <Style Selector="Button.nav-button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#D5DFEC"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="16,13"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style Selector="Button.nav-button:pointerover">
+            <Setter Property="Background" Value="#293B56"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+
+        <!-- ОСНОВНОЙ СТИЛЬ ЗЕЛЁНЫХ КНОПОК -->
+
+        <Style Selector="Button.primary-action">
+            <Setter Property="Background" Value="#258B78"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- НАВЕДЕНИЕ -->
+
+        <Style Selector="Button.primary-action:pointerover">
+            <Setter Property="Background" Value="#1E7468"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.primary-action:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#1E7468"/>
+        </Style>
+
+        <!-- НАЖАТИЕ -->
+
+        <Style Selector="Button.primary-action:pressed">
+            <Setter Property="Background" Value="#155A50"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.primary-action:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#155A50"/>
+        </Style>
+
+
+    </Window.Styles>
+
+    <Design.DataContext>
+        <vm:MainViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="245,*">
+
+        <!-- БОКОВАЯ ПАНЕЛЬ -->
+
+        <Border Grid.Column="0"
+                Background="#19283F">
+
+            <Grid RowDefinitions="Auto,*,Auto"
+                  Margin="20">
+
+                <StackPanel Spacing="5">
+
+                    
+                <Border Background="#258B78"
+                        Width="48"
+                        Height="48"
+                        CornerRadius="12"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,12">
+
+                    <Canvas Width="28"
+                            Height="28"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                        <!-- Стрелка вправо -->
+                        <Path Data="M 3,8 L 23,8 M 17,3 L 23,8 L 17,13"
+                            Stroke="White"
+                            StrokeThickness="2.5"
+                            StrokeLineCap="Round"
+                            Fill="Transparent"/>
+
+                        <!-- Стрелка влево -->
+                        <Path Data="M 25,20 L 5,20 M 11,15 L 5,20 L 11,25"
+                            Stroke="White"
+                            StrokeThickness="2.5"
+                            StrokeLineCap="Round"
+                            Fill="Transparent"/>
+
+                    </Canvas>
+
+                </Border>
+
+
+                    <TextBlock Text="CURRENCY EXCHANGE"
+                               FontSize="15"
+                               FontWeight="Bold"
+                               Foreground="White"/>
+
+                    <TextBlock Text="Система управления обменом"
+                               FontSize="11"
+                               Foreground="#A6B5C9"/>
+
+                </StackPanel>
+
+                <!-- НАВИГАЦИЯ -->
+
+                <StackPanel Grid.Row="1"
+                            Margin="0,40,0,0"
+                            Spacing="9">
+
+                    <TextBlock Text="ГЛАВНОЕ МЕНЮ"
+                               FontSize="10"
+                               FontWeight="Bold"
+                               Foreground="#8596AD"
+                               Margin="12,0,0,10"/>
+
+                    <Button Classes="nav-button"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="Обзор">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="13">
+                            <TextBlock Text="▦" FontSize="18"/>
+                            <TextBlock Text="Обзор"/>
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button Classes="nav-button"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="Обмен валют">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="13">
+                            <TextBlock Text="⇄" FontSize="19"/>
+                            <TextBlock Text="Обмен валют"/>
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button Classes="nav-button"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="Курсы валют">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="13">
+                            <TextBlock Text="₴" FontSize="18"/>
+                            <TextBlock Text="Курсы валют"/>
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button Classes="nav-button"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="Касса">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="13">
+                            <TextBlock Text="▤" FontSize="18"/>
+                            <TextBlock Text="Касса"/>
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button Classes="nav-button"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="История операций">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="13">
+                            <TextBlock Text="◷" FontSize="18"/>
+                            <TextBlock Text="История операций"/>
+                        </StackPanel>
+
+                    </Button>
+
+                </StackPanel>
+
+                <!-- НИЖНЯЯ ЧАСТЬ -->
+
+                <StackPanel Grid.Row="2"
+                            Spacing="5">
+
+                    <Border Height="1"
+                            Background="#35445B"
+                            Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Currency Exchange System"
+                               FontSize="11"
+                               Foreground="#A6B5C9"/>
+
+                    <TextBlock Text="Версия 1.0"
+                               FontSize="10"
+                               Foreground="#70839C"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+        <!-- ОСНОВНАЯ РАБОЧАЯ ОБЛАСТЬ -->
+
+        <Grid Grid.Column="1"
+              RowDefinitions="Auto,*"
+              Margin="32">
+
+            <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="*,Auto"
+                  Margin="0,0,0,28">
+
+                <StackPanel Spacing="5">
+
+                    <TextBlock Text="ПУНКТ ОБМЕНА ВАЛЮТ"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               Foreground="#8491A5"/>
+
+                    <TextBlock Text="{Binding CurrentPage}"
+                               FontSize="27"
+                               FontWeight="Bold"
+                               Foreground="#202D40"/>
+
+                </StackPanel>
+
+                <Border Grid.Column="1"
+                        Background="White"
+                        CornerRadius="10"
+                        Padding="14,10"
+                        VerticalAlignment="Center">
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="9">
+
+                        <Ellipse Width="9"
+                                 Height="9"
+                                 Fill="#20A77B"
+                                 VerticalAlignment="Center"/>
+
+                        <TextBlock Text="Система готова"
+                                   FontSize="12"
+                                   Foreground="#45546A"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
+            <!-- СОДЕРЖИМОЕ -->
+
+            <ScrollViewer Grid.Row="1">
+
+                <StackPanel Spacing="22">
+
+                    <Border Background="White"
+                            CornerRadius="16"
+                            Padding="26">
+
+                        <StackPanel Spacing="10">
+
+                            <TextBlock Text="{Binding CurrentPage}"
+                                       FontSize="21"
+                                       FontWeight="Bold"
+                                       Foreground="#202D40"/>
+
+                            <TextBlock Text="{Binding PageDescription}"
+                                       FontSize="14"
+                                       Foreground="#78869A"
+                                       TextWrapping="Wrap"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- КАРТОЧКИ ГЛАВНОЙ ПАНЕЛИ -->
+
+                    
+<!-- ДИНАМИЧЕСКАЯ СТАТИСТИКА -->
+
+<Grid IsVisible="{Binding IsDashboard}"
+      ColumnDefinitions="*,*,*,*">
+
+    <!-- ОПЕРАЦИИ -->
+
+    <Border Grid.Column="0"
+            Background="White"
+            CornerRadius="14"
+            Padding="15"
+            Margin="0,0,7,0">
+
+        <StackPanel Spacing="12">
+
+            <TextBlock Text="Операции сегодня"
+                       FontSize="12"
+                       Foreground="#78869A"/>
+
+            <TextBlock Text="{Binding TodayOperationsText}"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       Foreground="#26364D"/>
+
+            <TextBlock Text="Количество обменов"
+                       FontSize="10"
+                       Foreground="#9AA5B5"/>
+
+        </StackPanel>
+
+    </Border>
+
+    <!-- ОБОРОТ -->
+
+    <Border Grid.Column="1"
+            Background="White"
+            CornerRadius="14"
+            Padding="15"
+            Margin="4,0">
+
+        <StackPanel Spacing="12">
+
+            <TextBlock Text="Оборот сегодня"
+                       FontSize="12"
+                       Foreground="#78869A"/>
+
+            <TextBlock Text="{Binding TodayTurnoverText}"
+                       FontSize="19"
+                       FontWeight="Bold"
+                       Foreground="#258B78"/>
+
+            <TextBlock Text="В эквиваленте сомов"
+                       FontSize="10"
+                       Foreground="#9AA5B5"/>
+
+        </StackPanel>
+
+    </Border>
+
+    <!-- КАССА -->
+
+    <Border Grid.Column="2"
+            Background="White"
+            CornerRadius="14"
+            Padding="15"
+            Margin="4,0">
+
+        <StackPanel Spacing="12">
+
+            <TextBlock Text="Стоимость кассы"
+                       FontSize="12"
+                       Foreground="#78869A"/>
+
+            <TextBlock Text="{Binding CashEquivalentText}"
+                       FontSize="19"
+                       FontWeight="Bold"
+                       Foreground="#26364D"/>
+
+            <TextBlock Text="Оценка по курсу покупки"
+                       FontSize="10"
+                       Foreground="#9AA5B5"/>
+
+        </StackPanel>
+
+    </Border>
+
+    <!-- КОЛИЧЕСТВО ВАЛЮТ -->
+
+    <Border Grid.Column="3"
+            Background="White"
+            CornerRadius="14"
+            Padding="15"
+            Margin="7,0,0,0">
+
+        <StackPanel Spacing="12">
+
+            <TextBlock Text="Активные валюты"
+                       FontSize="12"
+                       Foreground="#78869A"/>
+
+            <TextBlock Text="{Binding ActiveCurrenciesText}"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       Foreground="#26364D"/>
+
+            <TextBlock Text="В справочнике"
+                       FontSize="10"
+                       Foreground="#9AA5B5"/>
+
+        </StackPanel>
+
+    </Border>
+
+</Grid>
+
+
+                    <!-- ИНФОРМАЦИЯ О РАЗДЕЛАХ -->
+
+                    <Border Background="#E8F2F0"
+                            CornerRadius="14"
+                            Padding="24"
+                            IsVisible="{Binding IsDashboard}">
+
+                        <StackPanel Spacing="9">
+
+                            <TextBlock Text="Рабочая область"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="#245E53"/>
+
+                            <TextBlock Text="Интерфейс подготовлен. Функциональность выбранного раздела будет добавлена на следующих этапах разработки."
+                                       FontSize="13"
+                                       Foreground="#52746C"
+                                       TextWrapping="Wrap"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+
+<!-- СТРАНИЦА КУРСОВ ВАЛЮТ -->
+
+<Border IsVisible="{Binding IsCurrencies}"
+        Background="White"
+        CornerRadius="16"
+        Padding="24">
+
+    <StackPanel Spacing="18">
+
+        <TextBlock Text="Действующие курсы валют"
+                   FontSize="19"
+                   FontWeight="Bold"
+                   Foreground="#202D40"/>
+
+        <Grid ColumnDefinitions="2*,*,*"
+              Margin="0,0,0,4">
+
+            <TextBlock Text="Валюта"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="Покупка"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="2"
+                       Text="Продажа"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding Currencies}">
+
+            <ItemsControl.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Border Background="#F5F7FA"
+                            CornerRadius="10"
+                            Padding="12"
+                            Margin="0,0,0,8">
+
+                        <Grid ColumnDefinitions="2*,*,*"
+                              VerticalAlignment="Center">
+
+                            <StackPanel VerticalAlignment="Center"
+                                        Spacing="3">
+
+                                <TextBlock Text="{Binding Code}"
+                                           FontSize="15"
+                                           FontWeight="Bold"
+                                           Foreground="#26364D"/>
+
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="11"
+                                           Foreground="#8491A5"/>
+
+                            </StackPanel>
+
+                            <TextBox Grid.Column="1"
+                                     Text="{Binding BuyRate, Mode=TwoWay}"
+                                     IsReadOnly="{Binding IsBase}"
+                                     Margin="4"
+                                     HorizontalContentAlignment="Center"/>
+
+                            <TextBox Grid.Column="2"
+                                     Text="{Binding SellRate, Mode=TwoWay}"
+                                     IsReadOnly="{Binding IsBase}"
+                                     Margin="4"
+                                     HorizontalContentAlignment="Center"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+
+        <Button Content="Сохранить изменения"
+        Command="{Binding SaveRatesCommand}"
+        Classes="primary-action"
+        HorizontalAlignment="Right"
+        Padding="20,11"/>
+
+        <TextBlock Text="{Binding StatusMessage}"
+                   FontSize="12"
+                   Foreground="#258B78"
+                   TextWrapping="Wrap"/>
+
+    </StackPanel>
+
+</Border>
+
+
+<!-- СТРАНИЦА КАССЫ -->
+
+<Border IsVisible="{Binding IsCash}"
+        Background="White"
+        CornerRadius="16"
+        Padding="24">
+
+    <StackPanel Spacing="18">
+
+        <TextBlock Text="Остатки денежных средств"
+                   FontSize="19"
+                   FontWeight="Bold"
+                   Foreground="#202D40"/>
+
+        <Grid ColumnDefinitions="2*,*,*"
+              Margin="0,0,0,5">
+
+            <TextBlock Text="Валюта"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="Код"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="2"
+                       Text="Остаток"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"
+                       HorizontalAlignment="Right"/>
+
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding CashBalances}">
+
+            <ItemsControl.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Border Background="#F5F7FA"
+                            CornerRadius="10"
+                            Padding="15"
+                            Margin="0,0,0,8">
+
+                        <Grid ColumnDefinitions="2*,*,*">
+
+                            <TextBlock Text="{Binding CurrencyName}"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="#26364D"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding CurrencyCode}"
+                                       FontSize="13"
+                                       Foreground="#64748B"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="2"
+                                       Text="{Binding Amount, StringFormat='{}{0:N2}'}"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#258B78"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+
+        <TextBlock Text="Остатки обновляются после проведения операций обмена."
+                   FontSize="12"
+                   Foreground="#8491A5"
+                   TextWrapping="Wrap"/>
+
+    </StackPanel>
+
+</Border>
+
+
+<!-- СТРАНИЦА ОБМЕНА ВАЛЮТ -->
+
+<Border IsVisible="{Binding IsExchange}"
+        Background="White"
+        CornerRadius="16"
+        Padding="24">
+
+    <StackPanel Spacing="22">
+
+        <StackPanel Spacing="5">
+            <TextBlock Text="Новая операция обмена"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#202D40"/>
+
+            <TextBlock Text="Выберите валюты и укажите сумму для обмена."
+                       FontSize="13"
+                       Foreground="#8491A5"/>
+        </StackPanel>
+
+        <Grid ColumnDefinitions="*,*">
+
+            <!-- КЛИЕНТ ОТДАЁТ -->
+
+            <StackPanel Grid.Column="0"
+                        Spacing="12"
+                        Margin="0,0,10,0">
+
+                <TextBlock Text="Клиент отдаёт"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="#45546A"/>
+
+                <ComboBox ItemsSource="{Binding Currencies}"
+                          SelectedItem="{Binding SelectedFromCurrency, Mode=TwoWay}"
+                          Padding="10">
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+
+                                <TextBlock Text="{Binding Code}"
+                                           FontWeight="Bold"/>
+
+                                <TextBlock Text="{Binding Name}"
+                                           Foreground="#8491A5"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                </ComboBox>
+
+                <TextBlock Text="Сумма"
+                           FontSize="12"
+                           Foreground="#8491A5"/>
+
+                <TextBox Text="{Binding FromAmountText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         FontSize="20"
+                         Padding="12"
+                         HorizontalContentAlignment="Left"/>
+
+            </StackPanel>
+
+            <!-- КЛИЕНТ ПОЛУЧАЕТ -->
+
+            <StackPanel Grid.Column="1"
+                        Spacing="12"
+                        Margin="10,0,0,0">
+
+                <TextBlock Text="Клиент получает"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="#45546A"/>
+
+                <ComboBox ItemsSource="{Binding Currencies}"
+                          SelectedItem="{Binding SelectedToCurrency, Mode=TwoWay}"
+                          Padding="10">
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+
+                                <TextBlock Text="{Binding Code}"
+                                           FontWeight="Bold"/>
+
+                                <TextBlock Text="{Binding Name}"
+                                           Foreground="#8491A5"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                </ComboBox>
+
+                <TextBlock Text="Сумма к выдаче"
+                           FontSize="12"
+                           Foreground="#8491A5"/>
+
+                <Border Background="#EDF5F2"
+                        CornerRadius="8"
+                        Padding="12"
+                        Height="49">
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="8"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="{Binding CalculatedAmountText}"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#258B78"/>
+
+                        <TextBlock Text="{Binding SelectedToCurrency.Code}"
+                                   FontSize="14"
+                                   Foreground="#258B78"
+                                   VerticalAlignment="Center"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+        </Grid>
+
+        <!-- ИНФОРМАЦИЯ О КУРСЕ -->
+
+        <Border Background="#F3F5F9"
+                CornerRadius="9"
+                Padding="14">
+
+            <TextBlock Text="{Binding PreviewRateText}"
+                       FontSize="13"
+                       Foreground="#45546A"
+                       TextWrapping="Wrap"/>
+
+        </Border>
+
+        <!-- КНОПКА ОФОРМЛЕНИЯ -->
+
+        <Button Content="Оформить обмен"
+        Command="{Binding ExecuteExchangeCommand}"
+        Classes="primary-action"
+        HorizontalAlignment="Stretch"
+        Padding="16"
+        FontSize="15"/>
+
+        <!-- РЕЗУЛЬТАТ -->
+
+        <Border Background="#F3F5F9"
+                CornerRadius="9"
+                Padding="14">
+
+            <TextBlock Text="{Binding ExchangeStatusMessage}"
+                       FontSize="13"
+                       Foreground="#258B78"
+                       TextWrapping="Wrap"/>
+
+        </Border>
+
+    </StackPanel>
+
+</Border>
+
+
+<!-- СТРАНИЦА ИСТОРИИ ОПЕРАЦИЙ -->
+
+<Border IsVisible="{Binding IsHistory}"
+        Background="White"
+        CornerRadius="16"
+        Padding="24">
+
+    <StackPanel Spacing="18">
+
+        <TextBlock Text="Журнал операций"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#202D40"/>
+
+        <!-- ПОИСК -->
+
+        <Grid ColumnDefinitions="*,Auto,Auto"
+              ColumnSpacing="10">
+
+            <TextBox Grid.Column="0"
+                Text="{Binding HistorySearchText, Mode=TwoWay}"
+                PlaceholderText="Поиск по валюте, дате или номеру операции..."
+                Padding="12"
+                VerticalContentAlignment="Center"/>
+
+            <Button Grid.Column="1"
+                Content="Найти"
+                Command="{Binding SearchHistoryCommand}"
+                Classes="primary-action"
+                Padding="20,10"/>
+
+            <Button Grid.Column="2"
+                    Content="Сбросить"
+                    Command="{Binding RefreshHistoryCommand}"
+                    Padding="16,10"/>
+
+        </Grid>
+
+        <!-- ЗАГОЛОВКИ ТАБЛИЦЫ -->
+
+        <Grid ColumnDefinitions="55,1.4*,*,*"
+              Margin="0,5,0,0">
+
+            <TextBlock Text="№"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="Дата операции"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="2"
+                       Text="Клиент отдал"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+            <TextBlock Grid.Column="3"
+                       Text="Клиент получил"
+                       FontWeight="Bold"
+                       Foreground="#8491A5"/>
+
+        </Grid>
+
+        <!-- СПИСОК ОПЕРАЦИЙ -->
+
+        <ItemsControl ItemsSource="{Binding HistoryOperations}">
+
+            <ItemsControl.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Border Background="#F5F7FA"
+                            CornerRadius="9"
+                            Padding="13"
+                            Margin="0,0,0,8">
+
+                        <Grid ColumnDefinitions="55,1.4*,*,*">
+
+                            <TextBlock Text="{Binding Id}"
+                                       FontWeight="Bold"
+                                       Foreground="#64748B"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding OperationDateText}"
+                                       FontSize="12"
+                                       Foreground="#45546A"
+                                       VerticalAlignment="Center"/>
+
+                            <StackPanel Grid.Column="2"
+                                        Spacing="3">
+
+                                <TextBlock Text="{Binding FromAmountText}"
+                                           FontSize="13"
+                                           FontWeight="Bold"
+                                           Foreground="#26364D"/>
+
+                                <TextBlock Text="{Binding FromCurrencyName}"
+                                           FontSize="10"
+                                           Foreground="#8491A5"/>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3"
+                                        Spacing="3">
+
+                                <TextBlock Text="{Binding ToAmountText}"
+                                           FontSize="13"
+                                           FontWeight="Bold"
+                                           Foreground="#258B78"/>
+
+                                <TextBlock Text="{Binding ToCurrencyName}"
+                                           FontSize="10"
+                                           Foreground="#8491A5"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+
+        <TextBlock Text="{Binding StatusMessage}"
+                   FontSize="12"
+                   Foreground="#8491A5"/>
+
+    </StackPanel>
+
+</Border>
+
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

@@ -1,0 +1,26 @@
+
+# Результаты сборки .NET
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Visual Studio Code
+.vscode/
+
+# Временные файлы macOS и Windows
+.DS_Store
+Thumbs.db
+
+# Локальные базы данных
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Локальная Windows-сборка
+/publish-win-x64/
